@@ -35,7 +35,7 @@
         class:bg-gray-700={option.id === selectedOptionId}
         class:text-white={(option.id === selectedOptionId && !invertColors) ||
           (option.id !== selectedOptionId && invertColors)}
-        class:bg-white={(option.id === selectedOptionId && invertColors) ||
+        class:bg-slate-300={(option.id === selectedOptionId && invertColors) ||
           (option.id !== selectedOptionId && !invertColors)}
         style={mapToStyleString(option.style)}
         on:click={() => (selectedOptionId = option.id)}

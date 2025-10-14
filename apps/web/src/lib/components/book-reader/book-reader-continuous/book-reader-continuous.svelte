@@ -568,7 +568,7 @@
     let fontLoaded = false;
 
     try {
-      fontLoaded = document.fonts.check(`${fontSize}px ${fontFamilyGroupOne || 'Noto Serif JP'}`);
+      fontLoaded = document.fonts.check(`${fontSize}px ${fontFamilyGroupOne || 'Noto Sans JP'}`);
     } catch (error: any) {
       logger.error(`Error checking Font Load: ${error.message}`);
       fontLoaded = true;

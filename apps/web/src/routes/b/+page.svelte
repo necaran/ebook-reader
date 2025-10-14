@@ -369,7 +369,7 @@
   const themeOption$ = theme$.pipe(
     map(
       (theme) =>
-        availableThemes.get(theme) || $customThemes$[theme] || availableThemes.get('light-theme')
+        availableThemes.get(theme) || $customThemes$[theme] || availableThemes.get('gray-theme')
     ),
     filter((o): o is NonNullable<typeof o> => !!o),
     takeWhenBrowser()

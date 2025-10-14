@@ -445,7 +445,7 @@
               }
             ])}
           on:delete={({ detail }) => {
-            $theme$ = optionsForTheme[optionsForTheme.length - 2]?.id || 'light-theme';
+            $theme$ = optionsForTheme[optionsForTheme.length - 2]?.id || 'gray-theme';
             delete $customThemes$[detail];
             $customThemes$ = { ...$customThemes$ };
           }}
@@ -476,15 +476,7 @@
     <SettingsItemGroup title="Font family (Group 1)">
       <div slot="header" class="flex items-center">
         <SettingsFontSelector
-          availableFonts={[
-            LocalFont.NOTOSERIFJP,
-            LocalFont.KZUDMINCHO,
-            LocalFont.GENEI,
-            LocalFont.SHIPPORIMINCHO,
-            LocalFont.KLEEONE,
-            LocalFont.KLEEONESEMIBOLD,
-            LocalFont.SERIF
-          ]}
+          availableFonts={[LocalFont.NOTOSANSJP, LocalFont.SANSSERIF, LocalFont.NOTOSERIFJP, LocalFont.SERIF]}
           bind:fontValue={fontFamilyGroupOne}
         />
         {#if fontCacheSupported}
@@ -508,14 +500,14 @@
       <input
         type="text"
         class={inputClasses}
-        placeholder="Noto Serif JP"
+        placeholder="Noto Sans JP"
         bind:value={fontFamilyGroupOne}
       />
     </SettingsItemGroup>
     <SettingsItemGroup title="Font family (Group 2)">
       <div slot="header" class="flex items-center">
         <SettingsFontSelector
-          availableFonts={[LocalFont.NOTOSANSJP, LocalFont.KZUDGOTHIC, LocalFont.SANSSERIF]}
+          availableFonts={[LocalFont.NOTOSANSJP, LocalFont.SANSSERIF]}
           bind:fontValue={fontFamilyGroupTwo}
         />
         {#if fontCacheSupported}
