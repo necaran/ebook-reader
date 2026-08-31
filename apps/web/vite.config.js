@@ -9,6 +9,7 @@ if (nodeVersion < 17) {
 
 /** @type {import('vite').UserConfig} */
 const config = {
+  build: { target: 'es2022' },
   plugins: [sveltekit()],
   ssr: {
     // https://github.com/FortAwesome/Font-Awesome/issues/18677
