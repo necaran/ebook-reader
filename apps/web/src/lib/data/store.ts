@@ -62,7 +62,7 @@ import type { WritingMode } from './writing-mode';
 import { writableSetLocalStorageSubject } from './internal/writable-set-local-storage-subject';
 import { writableStringLocalStorageSubject } from './internal/writable-string-local-storage-subject';
 
-export const theme$ = writableStringLocalStorageSubject()('theme', 'light-theme');
+export const theme$ = writableStringLocalStorageSubject()('theme', 'gray-theme');
 export const customThemes$ = writableObjectLocalStorageSubject<Record<string, ThemeOption>>()(
   'customThemes',
   {}
@@ -70,7 +70,7 @@ export const customThemes$ = writableObjectLocalStorageSubject<Record<string, Th
 export const multiplier$ = writableNumberLocalStorageSubject()('autoScrollMultiplier', 20);
 export const fontFamilyGroupOne$ = writableStringLocalStorageSubject()(
   'fontFamilyGroupOne',
-  'Noto Serif JP'
+  'Noto Sans JP'
 );
 export const fontFamilyGroupTwo$ = writableStringLocalStorageSubject()(
   'fontFamilyGroupTwo',
@@ -134,7 +134,7 @@ export const showFooterChapterCharacterCounter$ = writableBooleanLocalStorageSub
 );
 export const showFooterChapterPercentage$ = writableBooleanLocalStorageSubject()(
   'showFooterChapterPercentage',
-  false
+  true
 );
 export const viewMode$ = writableStringLocalStorageSubject<ViewMode>()(
   'viewMode',
@@ -151,7 +151,7 @@ export const swipeThreshold$ = writableNumberLocalStorageSubject()('swipeThresho
 
 export const disableWheelNavigation$ = writableBooleanLocalStorageSubject()(
   'disableWheelNavigation',
-  false
+  true
 );
 
 export const autoPositionOnResize$ = writableBooleanLocalStorageSubject()(
@@ -159,7 +159,7 @@ export const autoPositionOnResize$ = writableBooleanLocalStorageSubject()(
   true
 );
 
-export const avoidPageBreak$ = writableBooleanLocalStorageSubject()('avoidPageBreak', false);
+export const avoidPageBreak$ = writableBooleanLocalStorageSubject()('avoidPageBreak', true);
 
 export const pauseTrackerOnCustomPointChange$ = writableBooleanLocalStorageSubject()(
   'pauseTrackerOnCustomPointChange',
@@ -198,7 +198,7 @@ export const requestPersistentStorage$ = writableBooleanLocalStorageSubject()(
 
 export const hideExternalReadHint$ = writableBooleanLocalStorageSubject()(
   'hideExternalReadHint',
-  false
+  true
 );
 
 export const importHTMLFixMode$ = writableStringLocalStorageSubject<ImportHTMLFixMode>()(
@@ -215,7 +215,7 @@ export const cacheStorageData$ = writableBooleanLocalStorageSubject()('cacheStor
 
 export const autoReplication$ = writableStringLocalStorageSubject<AutoReplicationType>()(
   'autoReplication',
-  AutoReplicationType.Off
+  AutoReplicationType.All
 );
 
 export const replicationSaveBehavior$ =
@@ -325,12 +325,12 @@ export const readingGoal$ = writableObjectLocalStorageSubject<ReadingGoal>()('re
 
 export const lastExportedTarget$ = writableStringLocalStorageSubject<StorageKey>()(
   'lastExportedTarget',
-  StorageKey.BACKUP
+  StorageKey.BROWSER
 );
 
 export const lastExportedTypes$ = writableArrayLocalStorageSubject<StorageDataType>()(
   'lastExportedTypes',
-  [StorageDataType.PROGRESS, StorageDataType.STATISTICS]
+  [StorageDataType.DATA, StorageDataType.PROGRESS]
 );
 
 export const lastBlurredTrackerItems$ = writableSetLocalStorageSubject<string>()(
