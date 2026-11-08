@@ -21,6 +21,7 @@
   import { createEventDispatcher } from 'svelte';
   import Fa from 'svelte-fa';
 
+  export let storedData;
   export let configuredName: string;
   export let configuredIsSyncTarget: boolean;
   export let configuredIsStorageSourceDefault: boolean;
@@ -35,7 +36,7 @@
     close: void;
   }>();
 
-  const storageSourceRefreshToken = configuredRemoteData?.refreshToken || '';
+  let storageSourceRefreshToken = configuredRemoteData?.refreshToken || '';
 
   let containerElm: HTMLElement;
   let nameElm: HTMLInputElement;
@@ -58,6 +59,22 @@
     { key: StorageKey.GDRIVE, label: 'GDrive' },
     { key: StorageKey.ONEDRIVE, label: 'OneDrive' }
   ];
+  let hash;
+
+  async function updateHash() {
+    hash = '/#' + storageSourceType.replace('drive','') + ',' +
+      new Uint8Array(
+        hash||storedData?.clientId ?
+        await encrypt(top, JSON.stringify({
+          clientId: storageSourceClientId,
+          clientSecret: storageSourceClientSecret,
+          refreshToken: storageSourceRefreshToken
+        }), pwElm?.value) :
+        storedData
+      ).toBase64();
+  }
+
+  $: updateHash();
 
   $: if (browser && 'showDirectoryPicker' in window) {
     storageSourceTypes = [...storageSourceTypes, { key: StorageKey.FS, label: 'Filesystem' }];
@@ -282,6 +299,7 @@
         } else {
           directoryHandle = undefined;
           handleFsPath = '';
+          updateHash();
         }
       }}
     >
@@ -298,12 +316,20 @@
       </button>
       <div class="my-4 text-center">{handleFsPath || 'Nothing selected'}</div>
     {:else}
-      <input required type="text" placeholder="Client ID" bind:value={storageSourceClientId} />
+      <input required type="text" placeholder="Client ID" bind:value={storageSourceClientId} on:change={updateHash} />
       <input
         class="mt-4"
         type="text"
         placeholder="Client Secret"
         bind:value={storageSourceClientSecret}
+        on:change={updateHash}
+      />
+      <input
+        class="mt-4"
+        type="text"
+        placeholder="Refersh Token"
+        bind:value={storageSourceRefreshToken}
+        on:change={updateHash}
       />
       <input
         class="mt-4"
@@ -312,6 +338,7 @@
         required={!storageSourceEncryptionDisabled}
         disabled={storageSourceEncryptionDisabled}
         bind:this={pwElm}
+        on:change={updateHash}
       />
       <input
         class="mt-4"
@@ -346,6 +373,7 @@
               storageSourceStoredInManager = false;
               pwElm.value = '';
               pwConfirmElm.value = '';
+              storageSourceType==StorageKey.FS || updateHash()
             }
           }}
         />
@@ -377,6 +405,7 @@
       Cancel
       <Ripple />
     </button>
+    <a href={hash} class:hidden={storageSourceType==StorageKey.FS} target="_blank" style="padding:10px">🔗</a>
     <button class={buttonClasses} on:click={save}>
       Save
       <Ripple />

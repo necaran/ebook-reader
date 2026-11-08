@@ -132,6 +132,6 @@
   </div>
 {/if}
 
-<span style={`font-family: ${$fontFamilyGroupOne$ || 'Noto Serif JP'}`} />
+<span style={`font-family: ${$fontFamilyGroupOne$ || 'Noto Sans JP'}`} />
 
 <DomainHint />

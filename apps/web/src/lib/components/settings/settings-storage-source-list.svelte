@@ -114,6 +114,7 @@
         {
           component: SettingsStorageSource,
           props: {
+            storedData: storageSource?.data,
             configuredName: storageSource?.name,
             configuredType: storageSource?.type,
             configuredIsSyncTarget: storageSource ? $syncTarget$ === storageSource.name : false,
@@ -247,7 +248,7 @@
       <Ripple />
     </button>
   </div>
-  <hr class="border border-black" />
+  <hr class="border" />
   <div class="mt-6">
     {#if !listLoading && storageSources}
       <div class="grid grid-cols-1 gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
